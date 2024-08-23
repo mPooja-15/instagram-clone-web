@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const Suggestions = () => {
-    // Initialize followStatus with default values including at least one default follower
     const [followStatus, setFollowStatus] = useState(() => {
         const savedFollowStatus = localStorage.getItem('followStatus');
         return savedFollowStatus ? JSON.parse(savedFollowStatus) : {
@@ -10,40 +9,40 @@ const Suggestions = () => {
                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTWBwS10Rq-_Huyc449gljfAm088EG8XNiog&s',
                 details: 'Lorem ipsum dolor sit amet',
                 private: true,
-                followers: ['m_kundan'], // Default follower
-                followedBy: 'm_kundan' // Default followed by message
+                followers: ['m_kundan'],
+                followedBy: 'm_kundan'
             },
             kavbya_007: {
                 followed: false,
                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP059lc6iDmN4G4lHXG1yQGS4bhlJUHeuWaw&s',
                 details: 'Consectetur adipiscing elit',
                 private: false,
-                followers: ['j_doe'], // Default follower
-                followedBy: 'j_doe' // Default followed by message
+                followers: ['j_doe'],
+                followedBy: 'j_doe'
             },
             NotGamer_Fleet: {
                 followed: false,
                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJqypyYsjRrcAZlRKc-zAjeENINffo7EN2Pw&s',
                 details: 'Sed do eiusmod tempor incididunt',
                 private: true,
-                followers: ['x_player'], // Default follower
-                followedBy: 'x_player' // Default followed by message
+                followers: ['x_player'],
+                followedBy: 'x_player'
             },
             Pinki_shidhu: {
                 followed: false,
                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTODEJ7TOuaO5wmqmQj7Y3aYpu0nHUJ7sxQAg&s',
                 details: 'Ut labore et dolore magna aliqua',
                 private: false,
-                followers: ['n_smith'], // Default follower
-                followedBy: 'n_smith' // Default followed by message
+                followers: ['n_smith'],
+                followedBy: 'n_smith'
             },
             rakhi_Moni: {
                 followed: false,
                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaJBFx3frl4NbdX5VJbn7FpawQoXxH2vYCfA&s',
                 details: 'Enim ad minim veniam',
                 private: true,
-                followers: ['z_queen'], // Default follower
-                followedBy: 'z_queen' // Default followed by message
+                followers: ['z_queen'],
+                followedBy: 'z_queen'
             }
         };
     });
@@ -78,20 +77,20 @@ const Suggestions = () => {
                             <div>
                                 <p className="font-semibold">{user}</p>
                                 <p className="text-sm text-gray-500">
-                                    Followed by m_kundan
+                                    Followed by {followedBy}
                                 </p>
                             </div>
                         </div>
                         <button
                             className="text-blue-500 text-sm font-semibold"
                             onClick={(e) => {
-                                e.stopPropagation(); // Prevent the user click handler from firing
+                                e.stopPropagation();
                                 toggleFollow(user);
                             }}
                         >
                             {followed ? 'Unfollow' : 'Follow'}
                         </button>
-                        <div className="absolute hidden group-hover:block bg-white border border-gray-300 rounded-lg shadow-lg z-10 left-0 -bottom-20 transform p-4 w-64">
+                        <div className="absolute hidden group-hover:block bg-white border border-gray-300 rounded-lg shadow-lg z-10 top-[60px] left-0 transform h-[400px] p-4 w-[350px]">
                             <div className="flex items-center space-x-3">
                                 <img className="w-16 h-16 rounded-full" src={avatar} alt={user} />
                                 <div>
@@ -99,9 +98,7 @@ const Suggestions = () => {
                                     <p className="text-xs text-gray-600">{details}</p>
                                     {isPrivate && (
                                         <div className="flex items-center text-gray-500 mt-2 text-xs">
-                                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0V5a1 1 0 0 1 1-1zm1 10a1 1 0 0 1-1 1 1 1 0 0 1-1-1h2zm-3-4h6v4H7v-4zM4 12c0 4 2.5 7 7 7 4.5 0 7-3 7-7 0-4-2.5-7-7-7-4.5 0-7 3-7 7z"></path>
-                                            </svg>
+                                            <svg aria-label="" className="w-8 h-8 mr-3" fill="currentColor" height="48" role="img" viewBox="0 0 96 96" width="48"><title></title><circle cx="48" cy="48" fill="none" r="47" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M60.931 70.001H35.065a5.036 5.036 0 0 1-5.068-5.004V46.005A5.036 5.036 0 0 1 35.065 41H60.93a5.035 5.035 0 0 1 5.066 5.004v18.992A5.035 5.035 0 0 1 60.93 70ZM37.999 39.996v-6.998a10 10 0 0 1 20 0v6.998" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
                                             <span>Private Account</span>
                                         </div>
                                     )}
@@ -112,10 +109,11 @@ const Suggestions = () => {
                 ))}
             </div>
             {message && (
-                <div className="mt-4 p-3 bg-blue-100 text-blue-800 rounded-md shadow-md">
+                <div className="fixed top-4 left-1/2 transform -translate-x-1/2 p-3 bg-blue-500 text-white text-center rounded-md shadow-md animate-fadeInOut">
                     {message}
                 </div>
             )}
+
         </div>
     );
 };

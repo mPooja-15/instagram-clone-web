@@ -97,10 +97,23 @@ function Home() {
     const triggerFileSelect = () => {
         document.getElementById('fileInput').click();
     };
-
+    const [progress, setProgress] = useState(0);
+    const [timer, setTimer] = useState(null);
     const openStory = (story) => {
         setSelectedStory(story);
-    };
+        setProgress(0);
+        setTimer(setInterval(() => {
+          setProgress(prev => {
+            const newProgress = prev + (100 / (story.duration / 100));
+            if (newProgress >= 100) {
+              clearInterval(timer);
+              setSelectedStory(null);
+              return 100;
+            }
+            return newProgress;
+          });
+        }, 100));
+      };
 
     const closeStory = () => {
         setSelectedStory(null);
@@ -213,7 +226,14 @@ function Home() {
     useEffect(() => {
         localStorage.setItem('comments', JSON.stringify(comments));
     }, [comments]);
-
+    const handleCloseStory = () => {
+        clearInterval(timer);
+        setSelectedStory(null);
+      };
+    
+      useEffect(() => {
+        return () => clearInterval(timer); // Clean up timer on unmount
+      }, [timer]);
     
     return (
         <div className="flex bg-gray-50 min-h-screen">
@@ -345,7 +365,7 @@ function Home() {
                                         <button onClick={() => handleLike(post.id)}>
                                             {likedPosts.has(post.id) ? <FcLike size={28} /> : <FaRegHeart size={26} />}
                                         </button>
-                                        <span className="text-gray-500 text-sm">{likeCount(post.id)} likes</span>
+                                        <span className="text-gray-500 text-sm">1{likeCount(post.id)} likes</span>
                                         <button onClick={() => toggleCommentSection(post.id)}>
                                             <svg aria-label="Comment" className="x1lliihq x1n2onr6 x5n08af"
                                                 fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">

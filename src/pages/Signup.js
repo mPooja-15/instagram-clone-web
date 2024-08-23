@@ -10,20 +10,21 @@ const Signup = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSignup = (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
 
-        // Dummy signup logic, replace with actual logic
         if (mobileOrEmail && fullName && username && password) {
+            // Implement actual signup logic here
             console.log('Signup successful!');
-            navigate('/home');  // Redirect to home page upon successful signup
+            // Navigate to OTP input page
+            navigate('/OtpInput');  // Ensure this route is defined in your router
         } else {
             alert('Please fill in all the fields');
         }
     };
 
     const handleClickSignup = () => {
-        navigate('/');
+        navigate('/login');  // Navigate to login page
     };
 
     return (
@@ -71,21 +72,20 @@ const Signup = () => {
                         <input
                             placeholder='Password'
                             maxLength="75"
-                            className=" bg-[#fafafa] text-[#000] mb-[7px] border-[1px] w-[258px] h-[36px] text-[13px] text-left pt-[9px] pb-[7px] pl-[8px]"
+                            className="bg-[#fafafa] text-[#000] mb-[7px] border-[1px] w-[258px] h-[36px] text-[13px] text-left pt-[9px] pb-[7px] pl-[8px]"
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <div className="w-[280px] h-auto m-auto">
-                        <span className="text-[12px] text-center w-[20px] h-auto mb-[10px]">
-                            People who use our service may have uploaded your contact information to Instagram. <span className="text-[#00376b]">Learn More</span>
-                            
-                        </span>
-                        <div>
-                        <span className="text-[12px] text-center w-[20px] h-auto mb-[10px]">
-                            By signing up, you agree to our <span className="text-[#00376b]">Terms, Privacy Policy and Cookies Policy.</span>
-                        </span>
-                        </div>
+                            <span className="text-[12px] text-center w-[20px] h-auto mb-[10px]">
+                                People who use our service may have uploaded your contact information to Instagram. <span className="text-[#00376b]">Learn More</span>
+                            </span>
+                            <div>
+                                <span className="text-[12px] text-center w-[20px] h-auto mb-[10px]">
+                                    By signing up, you agree to our <span className="text-[#00376b]">Terms, Privacy Policy and Cookies Policy.</span>
+                                </span>
+                            </div>
                         </div>
                         <button
                             className="w-[260px] h-[32px] mb-[18px] bg-[#0095f6] text-[14px] text-[#fff] font-semibold opacity-[.7] relative rounded-[8px]"

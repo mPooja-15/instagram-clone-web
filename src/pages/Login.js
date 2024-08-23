@@ -3,7 +3,7 @@ import InstagramLogo from '../assets/logo/InstagramLogo.png';
 import images from '../assets/logo/images.png';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
     const navigate = useNavigate();
     const [emailOrPhone, setEmailOrPhone] = useState('');
     const [password, setPassword] = useState('');
@@ -18,6 +18,8 @@ const Login = () => {
             password === 'p123'
         ) {
             console.log('Login successful!');
+            setIsAuthenticated(true);  // Update authentication state
+            localStorage.setItem('isAuthenticated', 'true');  // Save auth status to localStorage
             navigate('/home');  // Redirect to home page upon successful login
         } else {
             alert('Invalid email/phone or password');
@@ -30,6 +32,7 @@ const Login = () => {
 
     return (
         <div>
+            {/* Your existing login form */}
             <div className="w-[350px] h-[589px] text-center mt-[50px]  m-auto">
                 <div className="flex flex-col items-center border border-gray-300 rounded-sm box-border shrink-0 text-base m-0 mb-2.5 p-2.5 relative align-baseline">
                     <img className="w-[175px] h-[51px] m-[20px]" src={InstagramLogo} alt="Instagram Logo" />

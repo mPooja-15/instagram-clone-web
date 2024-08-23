@@ -12,6 +12,7 @@ const Profile = () => {
   const [highlights, setHighlights] = useState([]);
   const [isHighlightModalOpen, setIsHighlightModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [issettingModalOpen, setIsWttingModalOpen] = useState(false);
   const [highlightName, setHighlightName] = useState("");
   const [highlightImage, setHighlightImage] = useState(null);
   const [profileName, setProfileName] = useState("azevde_dd");
@@ -22,6 +23,8 @@ const Profile = () => {
   const closeHighlightModal = () => setIsHighlightModalOpen(false);
   const openEditModal = () => setIsEditModalOpen(true);
   const closeEditModal = () => setIsEditModalOpen(false);
+  const openSetting = () => setIsWttingModalOpen(true);
+  const closeSetting = () => setIsWttingModalOpen(false);
   const handleFollow = () => setFollowingCount(followingCount + 1);
 
   const handleAddHighlight = () => {
@@ -81,7 +84,7 @@ const Profile = () => {
               <button className="bg-[#e1e0e0] ml-2 px-4 py-2 rounded-full font-semibold text-sm">
                 View Archive
               </button>
-              <TfiSettings onClick={openEditModal} className="text-2xl ml-2 cursor-pointer" />
+              <TfiSettings onClick={openSetting} className="text-2xl ml-2 cursor-pointer" />
             </div>
             <div className="mb-[10px] flex">
               <div className="flex text-center">
@@ -241,6 +244,17 @@ const Profile = () => {
             >
               <MdClose />
             </button>
+          </div>
+        </div>
+      )}
+      {issettingModalOpen && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-[#000] bg-opacity-70"
+          onClick={closeSetting}
+        >
+          <div
+            className="bg-white p-6 rounded-lg w-[400px] text-[#000] relative">
+           
           </div>
         </div>
       )}
